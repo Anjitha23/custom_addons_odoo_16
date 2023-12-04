@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates id="template" xml:space="preserve">
+    <t t-name="hospital.doctor_template">
+        <div id="doctor_carousel"
+             class="container carousel slide"
+             data-bs-ride="carousel"
+             t-att-data-bs-interval="interval">
+            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                <t t-foreach="chunks" t-as="chunk"
+                   t-key="index">
+                    <div t-att-class="chunk.is_active ? 'carousel-item active' : 'carousel-item'">
+                    <div class="row">
+                            <t t-foreach="chunk" t-as="doctor">
+                        <div class="block span3 col-3">
+                                    <div class="card-group">
+                                        <div class="card">
+                                            <img t-if="doctor.image_1920"
+                                                 t-att-src="'data:image/png;base64,' + doctor.image_1920"
+                                                 class="card-img-top"
+                                                 style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px;
+                                             padding-left: 5px; height: 200px; width:300px;"/>
+                                            <h5 t-esc="doctor.name"
+                                                class="card-text"/>
+                                            <a t-att-href="'/view/doctor/' + doctor.id"
+                                               class="btn btn-primary">
+                                                View Doctor's Profile
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Carousel Controls -->
+             <a class="carousel-control-prev" href="#doctor_carousel" role="button"
+                data-bs-slide="prev" style="width: 200px; height: 230px;">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"/>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#doctor_carousel" role="button"
+                       data-bs-slide="next" style="width: 200px; height: 230px;">
+                        <span class="carousel-control-next-icon" aria-hidden="true"/>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+    </t>
+</templates>
+
+
+
+

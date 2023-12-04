@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    form view-->
+    <record id="view_hr_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.hospital</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+            <field name="currency_id" invisible="1"/>
+            <field name="is_doctor" invisible="1"/>
+                <field name="fee" widget="monetory"
+                       attrs="{'invisible': [('is_doctor', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

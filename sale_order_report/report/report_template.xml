@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- template for report -->
+    <template id="report_sale_order">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="text-center">
+                    <h2>Sale Orders Report</h2>
+                    <h5 t-if="data['form_data']['customer_id']">Customer:
+                        <t t-esc="data['form_data']['customer_id'][1]"/>
+                    </h5>
+                </div>
+                <div class="text-left">
+                    <p t-if="data['form_data']['start_date']">From:
+                        <t t-esc="data['form_data']['start_date']"/>
+                    </p>
+                    <p t-if="data['form_data']['end_date']">To:
+                        <t t-esc="data['form_data']['end_date']"/>
+                    </p>
+                </div>
+
+                <table class="table table-bordered mt32">
+                    <thead>
+                        <tr>
+                            <th>Serial No.</th>
+                            <th>Order Date</th>
+                            <th>Product Name</th>
+                            <th>Product Category</th>
+                            <th>Sales price</th>
+                            <th>Quantity</th>
+                            <th>Product UOM</th>
+                            <th>Subtotal</th>
+                            <th>Customer</th>
+                            <th>Sales Tax</th>
+                            <th>Amount Untaxed</th>
+                            <th>Order Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="serial_number" t-value="1"/>
+                        <!-- Reset total variables for each order -->
+                        <t t-set="total_sales_price" t-value="0"/>
+                        <t t-set="total_quantity" t-value="0"/>
+                        <t t-set="total_subtotal" t-value="0"/>
+                        <t t-set="total_order_total" t-value="0"/>
+                        <t t-set="total_amount_tax" t-value="0"/>
+                        <t t-set="total_amount_untaxed" t-value="0"/>
+                        <t t-foreach="sale_orders" t-as="order">
+                            <tr>
+                                <td>
+                                    <t t-esc="serial_number"/>
+                                    <t t-set="serial_number"
+                                       t-value="serial_number + 1"/>
+                                </td>
+                                <td>
+                                    <t t-esc="order['sale_order_date']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="order['product_name']['en_US']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="order['product_category']"/>
+                                </td>
+                                <td>
+                                    <span
+                                            t-esc="order['list_price']"
+                                            t-options='{"widget": "monetary", "display_currency": currency}'
+                                    />
+                                    <t t-set="total_sales_price"
+                                       t-value="total_sales_price + order['list_price']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="order['quantity']"/>
+                                    <t t-set="total_quantity"
+                                       t-value="total_quantity + order['quantity']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="order['product_uom_name']"/>
+                                </td>
+                                <td>
+                                    <span
+                                            t-esc="order['price_subtotal']"
+                                            t-options='{"widget": "monetary", "display_currency": currency}'
+                                    />
+                                    <t t-set="total_subtotal"
+                                       t-value="total_subtotal + order['price_subtotal']"/>
+                                </td>
+                                <td>
+                                    <t t-esc="order['customer_name']"/>
+                                </td>
+
+                                <td>
+                                    <span
+                                            t-esc="order['price_reduce_taxinc']"
+                                            t-options='{"widget": "monetary", "display_currency": currency}'
+                                    />
+                                    <t t-set="total_amount_tax"
+                                       t-value="total_amount_tax + order['price_reduce_taxinc']"/>
+                                </td>
+                                <td>
+                                    <span
+                                            t-esc="order['price_reduce_taxexcl']"
+                                            t-options='{"widget": "monetary", "display_currency": currency}'
+                                    />
+                                    <t t-set="total_amount_untaxed"
+                                       t-value="total_amount_untaxed + order['price_reduce_taxexcl']"/>
+                                </td>
+                                <td>
+                                    <span
+                                            t-esc="order['order_total']"
+                                            t-options='{"widget": "monetary", "display_currency": currency}'
+                                    />
+                                </td>
+                            </tr>
+                        </t>
+                        <!-- Total Sales Price, Total Quantity, Total Subtotal, Total Amount Untaxed, and Total Amount Tax rows -->
+                        <tr>
+                            <th colspan="4">TOTAL</th>
+                            <th>
+                                <span
+                                    t-esc="total_sales_price"
+                                    t-options='{"widget": "monetary", "display_currency": currency}'
+                                />
+                            </th>
+                            <th>
+                                <span
+                                    t-esc="total_quantity"
+                                />
+                            </th>
+                            <td></td>
+                            <th>
+                                <span
+                                    t-esc="total_subtotal"
+                                    t-options='{"widget": "monetary", "display_currency": currency}'
+                                />
+                            </th>
+                            <td/>
+                            <th>
+                                <span
+                                    t-esc="total_amount_tax"
+                                    t-options='{"widget": "monetary", "display_currency": currency}'
+                                />
+                            </th>
+                            <th>
+                                <span
+                                    t-esc="total_amount_untaxed"
+                                    t-options='{"widget": "monetary", "display_currency": currency}'
+                                />
+                            </th>
+                            <td/>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+        </t>
+    </template>
+</odoo>

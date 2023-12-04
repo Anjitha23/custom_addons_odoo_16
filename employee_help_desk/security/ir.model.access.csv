@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_ticket,access_employee_ticket,model_employee_ticket,base.group_user,1,1,1,1
+access_employee_ticket_employees,access_employee_ticket_employees,model_employee_ticket,employee_help_desk.employee_access,0,0,1,0
+access_employee_ticket_managers,access_employee_ticket_managers,model_employee_ticket,employee_help_desk.manager_access,1,0,0,0

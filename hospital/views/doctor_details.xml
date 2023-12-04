@@ -1,0 +1,36 @@
+<odoo>
+    <template id="view_doctor_template" name="Doctor">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h3 class="card-title" t-esc="doctor.name"/>
+                                <t t-if="doctor.image_1920">
+                                    <img class="card-img-top"
+                                         t-att-src="'data:image/png;base64,' + doctor.image_1920.decode()"/>
+                                </t>
+                                <t t-if="doctor.mobile_phone">
+                                    <h6 class="card-text">Phone:
+                                        <t t-esc="doctor.mobile_phone"/>
+                                    </h6>
+                                </t>
+                                <t t-if="doctor.job_title">
+                                    <h6 class="card-text">Job Title:
+                                        <t t-esc="doctor.job_title"/>
+                                    </h6>
+                                </t>
+                                <t t-if="doctor.work_email">
+                                    <h6 class="card-text">Email:
+                                        <t t-esc="doctor.work_email"/>
+                                    </h6>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

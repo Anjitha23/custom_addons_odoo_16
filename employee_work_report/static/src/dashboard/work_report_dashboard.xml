@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template">
+    <div t-name="work_report_dashboard.WorkReportDashboard" owl="1">
+        <div class="oh_dashboards" style="margin-top: 20px;">
+            <div class="container-fluid o_pj_dashboard">
+                <div class="container h-100">
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <div class="col-12">
+                            <h2 class="text-center">Work Report Dashboard</h2>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="shadow">
+                                <div class="body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Count</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Daily Work Report
+                                                    Submitted
+                                                </td>
+                                                <td t-esc="dailyWorkReportDashboard.data.employees_with_email"
+                                                    t-on-click="showSubmittedEmployees"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Daily Work Report Not
+                                                    Submitted
+                                                </td>
+                                                <td t-esc="dailyWorkReportDashboard.data.employees_without_email"
+                                                    t-on-click="showNotSubmittedEmployees"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Employees</td>
+                                                <td t-esc="dailyWorkReportDashboard.data.total_employees"
+                                                    t-on-click="showEmployees"/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                            <!-- Add the date field below the table -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label>Date:</label>
+                                    <!-- Use the Odoo date picker component -->
+                                    <div t-attf-class="o_input o_field_widget"
+                                         t-attf-data-name="date"
+                                         t-attf-data-widget="date_picker">
+                                        <input t-att-value="dailyWorkReportDashboard.date"
+                                               type="date" class="o_input"
+                                               t-on-change="updateReportData"
+                                               t-ref="dateInput"/>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary"
+                                        t-on-click="getReportData">Fetch
+                                    Report Submitted Employees
+                                </button>
+                            </div>
+                            <!-- Display detailed report data -->
+                            <div class="row mt-3"
+                                 t-if="dailyWorkReportDashboard.reports">
+                                <div class="col">
+                                    <h4>Report Submitted Employees:</h4>
+                                    <ul>
+                                        <t t-foreach="dailyWorkReportDashboard.reports"
+                                           t-as="report"
+                                           t-key="report.report_key">
+                                            <li t-esc="report.employee"/>\n
+                                        </t>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</templates>

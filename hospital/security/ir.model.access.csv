@@ -1,0 +1,13 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_patient_card,access_patient_card,model_patient_card,base.group_user,1,1,1,1
+access_patient_card_receptionist,access_patient_card_receptionist,model_patient_card,hospital.hospital_receptionist_access,1,1,1,1
+access_patient_op_receptionist,access_patient_op_receptionist,model_patient_op,hospital.hospital_receptionist_access,1,1,1,1
+access_patient_treatment,access_patient_treatment,model_patient_treatment,base.group_user,1,1,1,1
+access_dr_appointment_receptionist,access_dr_appointment_receptionist,model_dr_appointment,hospital.hospital_receptionist_access,1,1,1,1
+access_create_appointment,access_create_appointment,model_create_appointment,base.group_user,1,1,1,1
+access_patient_report_wizard,access_patient_report_wizard,model_patient_report_wizard,base.group_user,1,1,1,1
+
+access_dr_appointment_doctor,access_dr_appointment_doctor,model_dr_appointment,hospital.hospital_doctor_access,1,0,0,1
+access_patient_card_doctor,access_patient_card_doctor,model_patient_card,hospital.hospital_doctor_access,1,0,0,0
+access_consultation_doctor,access_consultation_doctor,model_consultation,hospital.hospital_doctor_access,1,1,1,1
+access_disease_doctor,access_disease_doctor,model_disease,hospital.hospital_doctor_access,1,1,1,1

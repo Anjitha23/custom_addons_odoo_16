@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <!--tree view-->
+    <record id="patient_card_tree_view" model="ir.ui.view">
+        <field name="name">patient.card.tree</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <tree string="Patient Card">
+                <field name="patient"/>
+                <field name="partner_id"/>
+                <field name="dob"/>
+                <field name="age"/>
+                <field name="gender"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--        form view-->
+    <record id="patient_card_form_view" model="ir.ui.view">
+        <field name="name">patient.card.form</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirm"/>
+                    <button name="action_appointment_wizard"
+                            class="oe_highlight" states="draft"
+                            string="Create Appointment"
+                            type="object"
+                            help="Move Draft state to Appointment state"/>
+                </header>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object"
+                                icon="fa-book" name="get_appointment"
+                                attrs="{'invisible': [('appointment_count', '=', 0)]}">
+                            <field string=" Appointment"
+                                   name="appointment_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+
+                        <field name="patient"
+                               style="width=500px;font-size:30px;"/>
+                        <group name="partner_details">
+                            <field name="name" invisible='1'/>
+                            <field name="partner_id"
+                                   widget="res_partner_many2one"
+                                   context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}"
+                                   options="{&quot;always_reload&quot;: True}"/>
+                            <field name="partner_invoice_id"
+                                   groups="account.group_delivery_invoice_address"
+                                   context="{'default_type':'invoice'}"
+                                   options="{&quot;always_reload&quot;: True}"/>
+                            <field name="dob"/>
+                            <field name="age"/>
+                            <field name="appointment_count" invisible="1"/>
+
+
+                        </group>
+                        <group>
+                            <field name="gender"/>
+                            <field name="mobile"/>
+                            <field name="phone"/>
+                            <field name="blood_group"/>
+                        </group>
+                    </group>
+                    <!--            Adding new page-->
+                    <notebook>
+                        <page string="OP History">
+                            <field name="history_ids">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="token"/>
+                                    <field name="doctor_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--    search view-->
+    <record model="ir.ui.view" id="view_hospital_search">
+        <field name="name">patient.card.search</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Male" name="male"
+                        domain="[('gender', '=', 'male')]"/>
+                <filter string="Female" name="female"
+                        domain="[('gender', '=', 'female')]"/>
+                <filter string="Others" name="other"
+                        domain="[('gender', '=', 'other')]"/>
+
+                <group expand="0" string="group by">
+                    <filter string="Patient Name" name="partner_id"
+                            context="{'group_by':'partner_id'}"/>
+                    <filter string="Gender" name="gender"
+                            context="{'group_by':'gender'}"/>
+
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
+

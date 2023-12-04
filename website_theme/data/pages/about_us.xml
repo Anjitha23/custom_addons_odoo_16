@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- form view-->
+    <record id="page_about_us" model="website.page">
+        <field name="name">About Us</field>
+        <field name="is_published" eval="True"/>
+        <field name="url">/about-us</field>
+        <field name="type">qweb</field>
+        <field name="arch" type="xml">
+            <t t-name="website_theme.page_about_us">
+                <t t-call="website.layout">
+                    <div id="wrap" class="oe_structure">
+                        <h1>Hello World</h1>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+</odoo>

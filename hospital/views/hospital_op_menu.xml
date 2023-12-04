@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    acton for patient op-->
+     <record id="patient_op_action" model="ir.actions.act_window">
+        <field name="name">Patient Op</field>
+        <field name="res_model">patient.op</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_date':1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+<!--    action for doctor's appointment-->
+    <record id="dr_appointment_action" model="ir.actions.act_window">
+        <field name="name">Doctors Appointment</field>
+        <field name="res_model">dr.appointment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<!--    adding new menu named OP and submenu OP Tickets,Doctor's Appointment-->
+<menuitem id="hospital_third_menu_root" name="OP"
+          parent="hospital_menu_root"/>
+    <menuitem
+         parent="hospital_third_menu_root"
+         id="dr_appointment_menu"
+         name="Doctors Appointment"
+         action="dr_appointment_action"/>
+    <menuitem
+         parent="hospital_third_menu_root"
+         id="op_tickets_menu"
+         name="OP Tickets"
+         action="patient_op_action"/>
+
+</odoo>

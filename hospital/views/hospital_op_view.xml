@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <!--tree view-->
+    <record id="patient_op_tree_view" model="ir.ui.view">
+        <field name="name">patient.op.tree</field>
+        <field name="model">patient.op</field>
+        <field name="arch" type="xml">
+            <tree string="Patient Op">
+                <field name="token"/>
+                <field name="name_id"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <field name="doctor_id"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="fee" widget="monetory"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--        form view-->
+    <record id="patient_op_form_view" model="ir.ui.view">
+        <field name="name">patient.op.form</field>
+        <field name="model">patient.op</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirm,paid"/>
+                    <button name="action_confirm" class="oe_highlight"
+                            states="draft" string="Confirm" type="object"
+                            help="Move Appointment to confirm state"/>
+                    <button name="action_payment" class="oe_highlight"
+                            states="confirm" string="Fee Payment" type="object"
+                            help="Move  to paid state"/>
+                </header>
+                <sheet>
+                    <div name="button_box">
+                        <button class="oe_stat_button" type="object"
+                                icon="fa-money" name="get_payment"
+                                string="Payment"
+                                attrs="{'invisible': [('state', '!=', 'paid')]}">
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Paid"
+                            attrs="{'invisible': [('ribbon', '!=', True)]}"/>
+
+                    <group>
+                        <group>
+                            <field name="patient_card_id"/>
+                            <field name="name_id"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="blood_group"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+
+                            <field name="doctor_id"/>
+                            <field name="date"/>
+                            <field name="token"/>
+                            <field name="fee" widget="monetory"/>
+                            <field name="pay_id" invisible="1"/>
+                            <field name="ribbon" invisible="1"/>
+
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--    search view-->
+    <record model="ir.ui.view" id="view_patient_op_search">
+        <field name="name">patient.op.search</field>
+        <field name="model">patient.op</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Today" name="date"
+                        domain="[('date','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="group by">
+                    <filter string="Doctors" name="doctor_id"
+                            context="{'group_by':'doctor_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

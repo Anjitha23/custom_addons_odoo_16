@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--inherit the template of survey page-->
+<odoo>
+    <template id="survey_idle_timer" inherit_id="survey.survey_fill_header">
+        <xpath expr="//div[@class='o_survey_nav pt16 mb-2']//div[@class='container m-0 p-0']" position="inside">
+            <div class="row">
+                <div class="col-lg-2 pt-4">
+                    <h1 class="o_survey_timer_idle text-start"
+                        t-att-data-timer="survey.idle_duration"
+                        t-att-data-isidle="survey.is_idle_time">
+                    </h1>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

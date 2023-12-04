@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="website_partner_template" name="Partner">
+        <t t-call="website.layout">
+            <div class="container">
+                <span>Hello,
+                    <t t-esc="request.env.user.name"/>
+                </span>
+                <form class="form col-6" method="post" action="/create/partner">
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label type="phone">Phone:</label>
+                        <input type="text" name="phone" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label type="street">Street:</label>
+                        <input type="text" name="street" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label type="country_ids">Country:</label>
+                        <select id="country_ids" name="country"
+                                class="form-control">
+                            <t t-foreach="country_ids" t-as="country">
+                                <option t-att-value="country.id">
+                                    <t t-esc="country.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+    <template id="website_partner_success_template" name="Partner">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-success">
+                    <span>Successfully created
+                        <t t-esc="patient_card_ids.patient"/>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <t t-foreach="partner_ids" t-as="partner">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-header">
+                                <span t-esc="partner.name"/>
+                            </div>
+                            <span t-field="partner.image_1920"
+                                  t-options="{widget: 'image'}"/>
+                            <div class="card-footer">
+                                <a t-attf-href="/view/partner/{{slug(partner)}}"
+                                   type="submit" class="btn btn-success">view
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+    <template id="website_partner_view_template" name="Partner">
+    <t t-call="website.layout">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    <span t-esc="partner.name"/>
+                    <span t-esc="partner.email"/>
+                    <span t-esc="partner.phone"/>
+                </div>
+                <div class="card-footer">
+                    <span t-field="partner.image_1920"
+                          t-options="{widget: 'image'}"/>
+                    <div class="card-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+    </template>
+</odoo>

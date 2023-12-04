@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="employee_ticket_action" model="ir.actions.act_window">
+        <field name="name">Employee Ticket</field>
+        <field name="res_model">employee.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+  <menuitem id="employee_ticket_menu_root" name="Employee Help Desk"/>
+    <menuitem id="employee_ticket_first_menu_root" name="Employee Tickets"
+              parent="employee_ticket_menu_root" action="employee_ticket_action"/>
+</odoo>

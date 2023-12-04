@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_request_product_tree" model="ir.ui.view">
+        <field name="name">request.product.tree</field>
+        <field name="model">request.product</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="delivery_method" required="True"/>
+                <field name="request_id" invisible="1"/>
+                <field name="location_id" attrs="{'required': [('delivery_method', '=', 'it')],
+                                                       'invisible':[('delivery_method','!=','it')]}"/>
+                <field name="location_dest_id"
+                       attrs="{'required': [('delivery_method', '=', 'it')],
+                                                       'invisible':[('delivery_method','!=','it')]}"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Define the action -->
+    <record id="action_request_product_list" model="ir.actions.act_window">
+        <field name="name">Requested Products</field>
+        <field name="res_model">request.product</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_request_product_tree"/>
+    </record>
+</odoo>

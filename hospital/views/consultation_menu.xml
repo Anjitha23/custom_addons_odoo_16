@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    acton for patient op-->
+    <record id="consultation_action" model="ir.actions.act_window">
+        <field name="name">Consultation Details</field>
+        <field name="res_model">consultation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--    adding new menu named consultation -->
+    <menuitem id="hospital_fourth_menu_root" name="Consultation"
+              parent="hospital_menu_root"
+              action="consultation_action"/>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="salesperson_dropdown_crm.listView" t-inherit="web.ListView" owl="1">
+        <xpath expr="//t[@t-component='props.Renderer']" position="before">
+            <div style="margin-bottom: 10px;"> <!-- Adjust margin-bottom for the entire block -->
+                <h6 for="user_id" style="margin-left: 5px; padding: 5px;">SalesPerson:</h6>
+                <select name="user_id" style="width: 200px; height: 30px; margin-left:10px; padding: 5px; bottom: 5px;" t-on-change="onUserChange">
+                    <option value="">Select a Salesperson</option>
+                    <t t-foreach="loadSalesperson.data" t-as="data" t-key="data_index">
+                        <t t-if="data.display_name">
+                            <option t-att-value="data.display_name">
+                                <t t-esc="data.display_name"/>
+                            </option>
+                        </t>
+                    </t>
+                </select>
+            </div>
+        </xpath>
+    </t>
+</templates>

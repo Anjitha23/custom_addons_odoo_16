@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo noupdate="1">
+    <record model="ir.module.category" id="employee_tickets">
+        <field name="name">Employee Help Desk</field>
+        <field name="description">Employees can create tickets and
+            submit to Company Managers.
+        </field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!--    access right for employee-->
+    <record id="employee_access" model="res.groups">
+        <field name="name">Employees</field>
+        <field name="category_id" ref="employee_tickets"/>
+    </record>
+
+    <!--    access right for Company Manager-->
+    <record id="manager_access" model="res.groups">
+        <field name="name">Managers</field>
+        <field name="category_id" ref="employee_tickets"/>
+        <field name="implied_ids"
+               eval="[(4, ref('employee_help_desk.employee_access'))]"/>
+    </record>
+<!--    record rules-->
+    <record id="employee_ticket_rule" model="ir.rule">
+        <field name="name">Employee Tickets</field>
+        <field ref="model_employee_ticket" name="model_id"/>
+        <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+        <field name="groups" eval="[(4, ref('employee_help_desk.employee_access'))]"/>
+    </record>
+        <record id="users_ticket_rule" model="ir.rule">
+        <field name="name">Manager support</field>
+        <field ref="model_employee_ticket" name="model_id"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('employee_help_desk.manager_access'))]"/>
+    </record>
+</odoo>

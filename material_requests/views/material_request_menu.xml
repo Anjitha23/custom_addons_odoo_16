@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="material_request_action" model="ir.actions.act_window">
+        <field name="name">Material Requests</field>
+        <field name="res_model">material.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="material_request_menu_root" name="Material Request"/>
+    <menuitem id="material_request_first_menu_root" name="Material Requests"
+              parent="material_request_menu_root"
+              action="material_request_action"/>
+</odoo>

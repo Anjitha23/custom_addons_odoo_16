@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+    <record id="website_employee_ticket_menu" model="website.menu">
+        <field name="name">Employee Ticket</field>
+        <field name="url">/employee-ticket</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">1</field>
+    </record>
+    </data>
+</odoo>

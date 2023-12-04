@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="portal_scheduled_activities" name="Scheduled Activities"
+              customize_show="True" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Meetings And Calls</t>
+                <t t-set="url" t-value="'/my/activities'"/>
+                <t t-set="placeholder_count" t-value="'activity_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_activity_details" name="Scheduled Activities">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Scheduled Activities</t>
+            </t>
+
+            <t t-if="not activities">
+                <p>There are currently no Scheduled Activities in your
+                    account.
+                </p>
+            </t>
+
+            <t t-if="activities" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class='text-center'>Scheduled Date</th>
+                        <th class='text-center'>Activity Type</th>
+                        <th class='text-center'>Summary</th>
+                        <th class='text-center'>Assigned To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="activities" t-as="activity">
+                        <tr>
+                            <td class='text-center'>
+                                <span t-field="activity.date_deadline"/>
+                            </td>
+                            <td class="text-center">
+                                <a t-attf-href="/my/activity/form/#{activity.id}">
+                                    <span t-field="activity.activity_type_id.name"/>
+                                </a>
+                            </td>
+                            <td class='text-center'>
+                                <span t-field="activity.summary"/>
+                            </td>
+                            <td class='text-center'>
+                                <span t-field="activity.user_id"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <!-- New template for the form view of mail.activity -->
+    <template id="portal_activity_form" name="Activity Form">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Activity Form</t>
+            </t>
+
+            <t t-if="activity">
+                <!-- Display the fields from mail.activity in a table -->
+                <table class="table">
+                    <tr>
+                        <th>Activity Type</th>
+                        <td>
+                            <span t-field="activity.activity_type_id.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Scheduled Date</th>
+                        <td>
+                            <span t-field="activity.date_deadline"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Summary</th>
+                        <td>
+                            <span t-field="activity.summary"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Assigned To</th>
+                        <td>
+                            <span t-field="activity.user_id.name"/>
+                        </td>
+                    </tr>
+                    <!-- Add more rows for additional fields as needed -->
+                </table>
+            </t>
+            <t t-else="">
+                <p>No activity found.</p>
+            </t>
+        </t>
+    </template>
+</odoo>

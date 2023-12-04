@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <!--tree view-->
+    <record id="employee_ticket_tree_view" model="ir.ui.view">
+        <field name="name">employee.ticket.tree.view</field>
+        <field name="model">employee.ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Help Desk">
+                <field name="ticket"/>
+                <field name="date"/>
+                <field name="employee_id"/>
+                <field name="hr_related_requests"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--form view-->
+    <record id="employee_ticket_form_view" model="ir.ui.view">
+        <field name="name">employee.ticket.form.view</field>
+        <field name="model">employee.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submit,approved,rejected"/>
+                    <button name="action_submit"
+                            class="oe_highlight"
+                            states="draft" string="Submit"
+                            type="object"
+                            groups="employee_help_desk.employee_access"
+                            help="Move draft to Submit state"/>
+                    <button name="action_approve"
+                            class="oe_highlight"
+                            states="submit" string="Approve"
+                            type="object"
+                            groups="employee_help_desk.manager_access"
+                            help="Move draft to Approved state"/>
+                    <button name="action_reject"
+                            states="submit" string="Reject"
+                            type="object"
+                            groups="employee_help_desk.manager_access"
+                            help="Move  to Reject state"/>
+
+                </header>
+                <sheet>
+                    <field name="ticket"
+                           style="width=500px;font-size:30px;"/>
+                    <group>
+                        <group name="employee_ticket">
+                            <field name="employee_id"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="hr_related_requests"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

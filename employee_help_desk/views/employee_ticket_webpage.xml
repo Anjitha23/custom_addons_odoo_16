@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="employee_ticket_template" name="Employee help desk">
+        <t t-call="website.layout">
+            <t t-set="datetime" t-value="datetime.datetime"/>
+            <t t-set="current_date" t-value="datetime.now().date()"/>
+            <div class="container">
+                <form class="form col-6" method="post"
+                      action="/create/employee-ticket">
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+                    <t t-if="not date">
+                        <div class="form-group">
+                            <label for="date">Ticket Date:</label>
+                            <input type="date" id="date" name="date"
+                                   class="form-control"
+                                   t-attf-value="{{ current_date.strftime('%Y-%m-%d') }}"/>
+                        </div>
+                    </t>
+                    <div class="form-group">
+                        <label for="hr_related_requests">HR related requests
+                        </label>
+                        <input type="text" id="hr_related_requests"
+                               name="hr_related_requests" class="form-control">
+                        </input>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Raise
+                            Ticket
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+    <template id="website_employee_ticket_success_template"
+              name="Employee Ticket">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-success">
+                    <span>Successfully created
+                    </span>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="website_employee_ticket_no_access_template"
+              name="No Access Template">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-failure">
+                    <div>Access Denied
+                        <span>You don't have the necessary permissions to create
+                            an
+                            employee ticket.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

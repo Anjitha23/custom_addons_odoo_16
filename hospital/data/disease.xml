@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="patient_disease1" model="disease">
+            <field name="name">Anthrax</field>
+        </record>
+        <record id="patient_disease2" model="disease">
+            <field name="name">Chickenpox</field>
+        </record>
+        <record id="patient_disease3" model="disease">
+            <field name="name">COVID-19</field>
+        </record>
+        <record id="patient_disease4" model="disease">
+            <field name="name">Dengue</field>
+        </record>
+        <record id="patient_disease5" model="disease">
+            <field name="name">Diphtheria</field>
+        </record>
+    </data>
+</odoo>

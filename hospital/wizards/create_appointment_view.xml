@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="create_appointment_wizard_action" model="ir.actions.act_window">
+        <field name="name">Create Appointment</field>
+        <field name="res_model">create.appointment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="create_appointment_action" model="ir.ui.view">
+        <field name="name">create.appointment.form</field>
+        <field name="model">create.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Create Appointment">
+                <group>
+                    <field name="doctor_id"/>
+                    <field name="patient_card_id"/>
+
+                </group>
+                <footer>
+                    <button string="Save" type="object" name="action_save"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary"
+                            name="action_cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

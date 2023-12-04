@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <!--tree view-->
+    <record id="consultation_tree_view" model="ir.ui.view">
+        <field name="name">consultation.tree</field>
+        <field name="model">consultation</field>
+        <field name="arch" type="xml">
+            <tree string="Consultation Details">
+                <field name="name_id"/>
+                <field name="doctor_id"/>
+                <field name="department_id"/>
+                <field name="disease"/>
+
+            </tree>
+        </field>
+    </record>
+    <!--        form view-->
+    <record id="consulttaion_view" model="ir.ui.view">
+        <field name="name">consultation.form</field>
+        <field name="model">consultation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group name="consultation_details">
+                            <field name="patient_card_id"/>
+                            <field name="name_id"/>
+
+                            <field name="consultation_type"/>
+                            <field name="doctor_id"/>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="date"/>
+                            <field name="disease"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Diagnosis">
+                            <field name="diagnose"/>
+                        </page>
+                        <page string="Treatment">
+
+                            <field name="treatment_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--    search view-->
+    <record model="ir.ui.view" id="view_consultation_search">
+        <field name="name">consultation.search</field>
+        <field name="model">consultation</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Today" name="date"
+                        domain="[('date','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="group by">
+                    <filter string="Doctors" name="doctor_id"
+                            context="{'group_by':'doctor_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="patient_card_template" name="Patient Card">
+        <t t-call="website.layout">
+            <div class="container">
+                <form class="form col-6 o_patient_details" method="post"
+                      action="/create/patient_card">
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+                    <div class="form-group">
+                        <label for="partner_id">Existing Patient:
+                        </label>
+                        <select id="partner_id" name="partner_id"
+                                class="form-control">
+                            <option value="">Select Partner:</option>
+                            <t t-foreach="partners" t-as="partner">
+                                <option t-att-value="partner.id">
+                                    <t t-esc="partner.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <t t-if="not partner_id">
+                        <div class="form-group" id="partner_name">
+                            <label for="new_partner_name">New Patient:
+                            </label>
+                            <input type="text" name="new_partner_name"
+                                   id="new_partner_name"
+                                   placeholder="New Partner Name"
+                                   class="form-control" required="1"/>
+                        </div>
+                    </t>
+                    <div class="form-group">
+                        <label for="dob">Date Of Birth:</label>
+                        <input type="date" id="dob" name="dob"
+                               class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="text" name="age" id="age"
+                               class="form-control" readonly="1"/>
+                        <span class="age-error" style="color: red;"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" name="gender" class="form-control">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="blood_group">Blood Group:</label>
+                        <select id="blood_group" name="blood_group"
+                                class="form-control" required="1">
+                            <option value="">Select Group</option>
+                            <option value="a">A+ve</option>
+                            <option value="b">B+ve</option>
+                            <option value="o">O+ve</option>
+                            <option value="ab">AB+ve</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create
+                        </button>
+                    </div>
+                </form>
+                <p>Already have a Patient Card?
+                    <a href="/appointment" target="_blank">Create Appointment
+                    </a>
+                </p>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="book_appointment_template" name="Appointment">
+        <t t-call="website.layout">
+            <div class="container">
+                <form class="form col-6" method="post"
+                      action="/create/appointment">
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+                    <div class="form-group">
+                        <label for="patient_card_id">Patient Card:</label>
+                        <select id="patient_card_id" name="patient_card_id"
+                                class="form-control" required="1">
+                            <option value="">Select Patient Card</option>
+                            <t t-foreach="patient_card_ids" t-as="patient_card">
+                                <option t-att-value="patient_card.id">
+                                    <span t-esc="patient_card.patient"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor_id">Doctor:</label>
+                        <select id="doctor_id" name="doctor_id"
+                                class="form-control" required="1">
+                            <option value="">Select Doctor</option>
+                            <t t-foreach="doctor_ids" t-as="doctor">
+                                <option t-att-value="doctor.id">
+                                    <t t-esc="doctor.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create
+                        </button>
+                        <p> Click here to create new Patient Card?
+                            <a href="/patient" target="_blank">Create Patient Card </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+    <template id="website_appointment_success_template" name="Appointment">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-success">
+                    <span>Successfully created
+                    </span>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

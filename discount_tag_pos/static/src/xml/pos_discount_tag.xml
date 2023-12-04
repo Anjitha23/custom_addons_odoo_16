@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+   <t t-inherit="point_of_sale.ProductItem"
+      t-inherit-mode="extension" owl="1">
+     <xpath expr="//div[@class='product-img']" position="inside">
+         <t t-if="props.product.discount_price">
+             <div class="discount-tag" style="position: absolute; top: 0; right: 0;">
+                 <i class="fa fa-tag"/>
+                 <t t-esc="env.pos.format_currency(props.product.discount_price)"/></div>
+         </t>
+     </xpath>
+   </t>
+    <t t-inherit="point_of_sale.OrderLinesReceipt"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-foreach='receipt.orderlines']" position="inside">
+            <t t-if="line.discount_price">
+
+                <div class="discount-tag">
+                    <div>Discount price:
+                        <i class="fa fa-tag"/> <t t-esc="env.pos.format_currency(line.discount_price)"/>
+                    </div>
+                </div>
+
+            </t>
+     </xpath>
+    </t>
+</templates>

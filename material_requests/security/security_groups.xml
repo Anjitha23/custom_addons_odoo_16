@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo noupdate="1">
+
+    <record model="ir.module.category" id="material_request">
+        <field name="name">Material Request</field>
+        <field name="description">Employees can create material requests and
+            submit to Requisition managers.
+        </field>
+        <field name="sequence">10</field>
+    </record>
+     <!--    access right for Requisition User-->
+    <record id="user_access" model="res.groups">
+        <field name="name">users</field>
+        <field name="category_id" ref="material_request"/>
+    </record>
+    <!--    access right for employee-->
+    <record id="employee_access" model="res.groups">
+        <field name="name">Employees</field>
+        <field name="category_id" ref="material_request"/>
+        <field name="implied_ids"
+               eval="[(4, ref('material_requests.user_access'))]"/>
+    </record>
+
+    <!--    access right for Requisition Manager-->
+    <record id="manager_access" model="res.groups">
+        <field name="name">Managers</field>
+        <field name="category_id" ref="material_request"/>
+        <field name="implied_ids"
+               eval="[(4, ref('material_requests.employee_access'))]"/>
+    </record>
+
+     <!--    access right for Requisition Head-->
+    <record id="head_access" model="res.groups">
+        <field name="name">head</field>
+        <field name="category_id" ref="material_request"/>
+        <field name="implied_ids"
+               eval="[(4, ref('material_requests.manager_access'))]"/>
+    </record>
+</odoo>

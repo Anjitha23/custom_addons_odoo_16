@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="patient_card_action" model="ir.actions.act_window">
+        <field name="name">Patient Card</field>
+        <field name="res_model">patient.card</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+  <menuitem id="hospital_menu_root" name="Hospital Management"/>
+    <menuitem id="hospital_first_menu_root" name="Patient Details"
+              parent="hospital_menu_root" action="patient_card_action"/>
+    <menuitem
+            parent="hospital_first_menu_root"
+            id="hospital_second_menu_root"
+            name="Patient Card"
+            action="patient_card_action"/>
+
+
+    <!--    adding new menu named medical report -->
+    <menuitem id="hospital_fifth_menu_root" name="Hospital Report"
+              parent="hospital_menu_root" action="patient_card_action"/>
+    <menuitem
+            parent="hospital_fifth_menu_root"
+            id="hospital_sub_menu_root"
+            name="Patient Report"
+            action="hospital.patient_report_wizard_action"/>
+</odoo>

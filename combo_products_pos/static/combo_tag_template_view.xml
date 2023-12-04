@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="ProductItem" t-inherit="point_of_sale.ProductItem"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-esc='props.product.display_name']" position="after">
+            <t t-log="props"/>
+            <br/>
+            <!-- Add the combo product ribbon below -->
+<!--            <t t-if="props.product.is_combo">-->
+            <div style="background-color: green;
+             color: white; padding: 5px;
+             font-weight: bold; text-align: center;
+             position: absolute; top: 50%; left: 50%;
+             transform: translate(-50%, -50%); z-index: 1; width: 100%;">
+                Combo Product
+
+            </div>
+<!--            </t>-->
+        </xpath>
+    </t>
+</templates>

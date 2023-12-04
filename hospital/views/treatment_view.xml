@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_patient_treatment_tree" model="ir.ui.view">
+        <field name="name">patient.treatment.tree</field>
+        <field name="model">patient.treatment</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="medicine"/>
+                <field name="dose"/>
+                <field name="days"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Define the action -->
+    <record id="action_patient_treatment_list" model="ir.actions.act_window">
+        <field name="name">Treatment List</field>
+        <field name="res_model">patient.treatment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_patient_treatment_tree"/>
+    </record>
+</odoo>

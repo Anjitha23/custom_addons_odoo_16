@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+   <t t-name="ProductItem" t-inherit="point_of_sale.ProductItem"
+      t-inherit-mode="extension" owl="1">
+     <xpath expr="//t[@t-esc='props.product.display_name']" position="after">
+          <br/>
+         <t t-log="props"/>
+         <t t-if="props.product.product_rating">
+             <div class="product-name" >
+             <div class="rating">
+                 <t t-if="props.product.product_rating == 1">
+               <i class="fa fa-star checked" />
+                 </t>
+                 <t t-if="props.product.product_rating == 2">
+                 <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                 </t>
+                 <t t-if="props.product.product_rating == 3">
+                 <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                 </t>
+                 <t t-if="props.product.product_rating == 4">
+                 <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                 </t>
+                 <t t-if="props.product.product_rating == 5">
+                 <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                     <i class="fa fa-star checked"/>
+                 </t>
+             </div>
+             </div>
+         </t>
+      </xpath>
+   </t>
+
+<!--Product Rating In OrderLinesReceipt-->
+    <t t-inherit="point_of_sale.OrderLinesReceipt"
+       t-inherit-mode="extension" owl="1">
+     <xpath expr="//t[@t-foreach='receipt.orderlines']" position="inside">
+         <t t-if="line.product_rating">
+         <div>Quality Rate:
+             <t t-if="line.product_rating == 1">
+             <i class="fa fa-star checked" />
+             </t>
+             <t t-if="line.product_rating == 2">
+                    <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+             </t>
+             <t t-if="line.product_rating == 3">
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+             </t>
+             <t t-if="line.product_rating == 4">
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+             </t>
+              <t t-if="line.product_rating == 5">
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+                 <i class="fa fa-star checked"/>
+             </t>
+         </div>
+         </t>
+     </xpath>
+    </t>
+</templates>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+<!-- Created the Razorpay payment provider-->
+        <record id="razorpay_payment_gateway" model="payment.provider">
+            <field name="code">testrazorpayment</field>
+            <field name="name">Razorpay Payment</field>
+            <field name="image_128" type="base64"
+                   file="payment_gateway/static/img/razorpay.png"/>
+            <field name="module_id" ref="base.module_payment_razorpay"/>
+            <field name="redirect_form_view_id" ref="redirect_form"/>
+        </record>
+<!-- To save the payment journal set in the payment provider.-->
+        <record id="payment_method_razorpay" model="account.payment.method">
+            <field name="name">Razorpay Payment</field>
+            <field name="code">testrazorpayment</field>
+            <field name="payment_type">inbound</field>
+        </record>
+<!-- By default the field automatic invoice should be enable -->
+        <record id="automatic_invoice_true" model="ir.config_parameter">
+            <field name="key">"sale.automatic_invoice"</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

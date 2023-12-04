@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="doctor_snippet" name="Doctors">
+        <section class="container top_doctor_snippets">
+            <div class="row">
+                    <h1>Doctors</h1>
+                    <div class="h3" style="text-align:center">Best Doctors in our Hospital:</div>
+                    <div class="doctor_data row">
+                        <div id="courosel">
+                        </div>
+                    </div>
+                    </div>
+        </section>
+    </template>
+
+    <template id="best_doctors_snippet" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="hospital.doctor_snippet"/>
+        </xpath>
+    </template>
+</odoo>

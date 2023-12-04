@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <!--tree view-->
+    <record id="dr_appointment_tree_view" model="ir.ui.view">
+        <field name="name">dr.appointment.tree</field>
+        <field name="model">dr.appointment</field>
+        <field name="arch" type="xml">
+            <tree string="Doctors Appointment">
+                <field name="date"/>
+                <field name="token"/>
+                <field name="partner_id"/>
+                <field name="doctor_id"/>
+            </tree>
+        </field>
+    </record>
+    <!--        form view-->
+    <record id="dr_appointment_view" model="ir.ui.view">
+        <field name="name">dr.appointment.form</field>
+        <field name="model">dr.appointment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,appointment,op"/>
+                    <button name="action_appointment" class="oe_highlight"
+                            states="draft" string="Appointment"
+                            type="object"
+                            help="Move Draft state to Appointment state"/>
+                    <button name="action_op_wizard" class="oe_highlight"
+                            states="appointment" string="Convert to OP"
+                            type="object"/>
+                </header>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object"
+                                icon="fa-ticket" name="get_op_ticket"
+                                states="op"
+                                attrs="{'invisible': [('ticket_count', '=', 0)]}">
+                            <field string="OP Ticket" name="ticket_count"
+                                   widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group name="doctors_appointmnet">
+                            <field name="patient_card_id"/>
+                            <field name="partner_id"/>
+                            <field name="phone"/>
+                            <field name="doctor_id"/>
+                            <field name="user_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="date"/>
+                            <field name="token"/>
+                            <field name="op_ticket_id" invisible="1"/>
+
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--    search view-->
+    <record model="ir.ui.view" id="view_dr_appointment_search">
+        <field name="name">dr.appointment.search</field>
+        <field name="model">dr.appointment</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Today" name="date"
+                        domain="[('date','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="group by">
+                    <filter string="Doctors" name="doctor_id"
+                            context="{'group_by':'doctor_id'}"/>
+
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- tree view -->
+    <record id="daily_work_report_tree_view" model="ir.ui.view">
+        <field name="name">daily.work.report.tree.view</field>
+        <field name="model">daily.work.report</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Work Report">
+                <field name="name"/>
+                <field name="employee"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view -->
+    <record id="daily_work_report_form_view" model="ir.ui.view">
+        <field name="name">daily.work.report.form.view</field>
+        <field name="model">daily.work.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!-- Display employee name and date above the notebook page -->
+                    <group>
+                        <field name="name" style="width=500px;font-size:20px;"/>
+                        <field name="employee"/>
+                    </group>
+                    <group>
+                        <field name="date"/>
+                    </group>
+
+                    <!-- Notebook with a page for email body -->
+                    <notebook>
+                        <page string="Daily Report" name="email_body_page">
+                            <field name="email_body" type="html"/>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- pivot view -->
+    <record id="daily_work_report_pivot_view" model="ir.ui.view">
+        <field name="name">daily.work.report.pivot.view</field>
+        <field name="model">daily.work.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Employee Work Report">
+                <field name="name"/>
+                <field name="employee" type="row"/>
+                <field name="date" type="col" interval="day"/>
+            </pivot>
+        </field>
+    </record>
+    <!-- graph view -->
+    <record id="daily_work_report_graph_view" model="ir.ui.view">
+        <field name="name">daily.work.report.graph.view</field>
+        <field name="model">daily.work.report</field>
+        <field name="arch" type="xml">
+            <graph string="Employee Work Report">
+                <field name="name"/>
+                <field name="employee" type="row"/>
+                <field name="date" type="col" interval="day"/>
+            </graph>
+        </field>
+    </record>
+    <!--    search view-->
+    <record model="ir.ui.view" id="view_work_report_search">
+        <field name="name">daily.work.report.search</field>
+        <field name="model">daily.work.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Today" name="date"
+                        domain="[('date','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="group by">
+                    <filter string="Employees" name="employee"
+                            context="{'group_by':'employee'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>
