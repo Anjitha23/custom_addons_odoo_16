@@ -9,6 +9,7 @@
     'description': """Adding a sale order button to the product screen in point of sale to create sale order in sale order module """,
     'data': [
         'views/pos_config_views.xml',
+        'views/pos_session.xml',
         ],
     'assets': {
        'point_of_sale.assets': [
