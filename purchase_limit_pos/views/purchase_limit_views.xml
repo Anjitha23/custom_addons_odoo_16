@@ -5,7 +5,7 @@
         <field name="name">res.partner.view.form.inherit</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
-        <fie ld name="arch" type="xml">
+        <field name="arch" type="xml">
             <xpath expr="//field[@name='barcode']" position="after">
                 <field name="is_purchase_limit" widget="boolean_toggle"/>
                 <field name="add_limit" attrs="{'invisible': [('is_purchase_limit', '=', False)]}"/>
