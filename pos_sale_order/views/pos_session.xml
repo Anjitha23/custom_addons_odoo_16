@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
         <field name="arch" type="xml">
             <field name="config_id" position="before">
-                <field name="sale_order_ids" invisible="1" domain="[('pos_session_id', '=', active_id)]"/>
+                <field name="sale_order_ids" invisible="1"/>
                 <field name="sale_order_count" invisible="1"/>
             </field>
             <div name="button_box" position="inside">

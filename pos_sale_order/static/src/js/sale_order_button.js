@@ -24,8 +24,8 @@ odoo.define('point_of_sale.SaleOrderButton', function(require) {
                 });
                 return;
             }
-            if (!getOrderline){
-             // Display error popup if no order line or customer is selected
+            if (!getOrderline) {
+                // Display error popup if no order line or customer is selected
                 await this.showPopup('ErrorPopup', {
                     title: this.env._t('Error'),
                     body: this.env._t('Please select at least one product in order line before creating a sale order.'),
@@ -64,16 +64,11 @@ odoo.define('point_of_sale.SaleOrderButton', function(require) {
         async createSaleOrder(state) {
             const order = this.env.pos.get_order();
 
-//            // Ensure that a customer is set on the order
-//            if (!order.get_partner()) {
-//                console.error('Customer is not set on the order.');
-//                return;
-//            }
-
             // Customize this based on your Odoo model and fields
             const orderData = {
                 partner_id: order.get_partner().id,
                 state: state,  // 'draft' or 'sale' (or other valid state)
+                pos_session_id: this.env.pos.pos_session.id,  // Add the corresponding POS session ID
                 // Add other fields as needed
             };
 
@@ -82,6 +77,13 @@ odoo.define('point_of_sale.SaleOrderButton', function(require) {
                     model: 'sale.order',
                     method: 'create',
                     args: [orderData],
+                });
+
+                // Set the boolean field created_from_pos to true
+                await this.rpc({
+                    model: 'sale.order',
+                    method: 'write',
+                    args: [[createdSaleOrderID], { created_from_pos: true }],
                 });
 
                 // Fetch the created sale order to get the reference

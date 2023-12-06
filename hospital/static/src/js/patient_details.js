@@ -26,7 +26,6 @@ odoo.define('hospital.calculate_age', function (require) {
                     (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
                     age--;
                 }
-report
                 if (age < 0) {
                     $('.age-error').text('Invalid date of birth. Please check!!');
                     $('#age').val(''); // Clear the age field
