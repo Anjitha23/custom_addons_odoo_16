@@ -45,8 +45,6 @@ odoo.define('point_of_sale.SaleOrderButton', function(require) {
                 try {
                     const reference = await this.createSaleOrder(selectedOption);
                     if (reference) {
-                        console.log('Sale Order Reference:', reference);
-
                         // Display confirmation popup
                         await this.showPopup('ConfirmPopup', {
                             title: this.env._t('Sale Order Created'),
@@ -128,6 +126,9 @@ odoo.define('point_of_sale.SaleOrderButton', function(require) {
     SaleOrderButton.template = "SaleOrderButton";
     ProductScreen.addControlButton({
         component: SaleOrderButton,
+        condition: function() {
+            return this.env.pos.config.create_sale_order;
+        },
         position: ['before', "RefundButton"],
     });
 

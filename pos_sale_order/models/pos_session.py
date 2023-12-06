@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+"""model to inherit pos.session"""
 from odoo import api, fields, models
 
+
 class PosSession(models.Model):
+    """declaring a class for pos.session"""
     _inherit = 'pos.session'
 
     sale_order_ids = fields.One2many(
@@ -22,6 +25,7 @@ class PosSession(models.Model):
             session.sale_order_count = len(session.sale_order_ids)
 
     def action_open_sale_orders(self):
+        """function for sale order smart button"""
         sale_order_ids = self.sale_order_ids.ids
 
         return {

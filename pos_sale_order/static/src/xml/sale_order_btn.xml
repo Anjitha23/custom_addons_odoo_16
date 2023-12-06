@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
+<!--    button template-->
     <t t-name="SaleOrderButton" owl="1">
         <div class="control-button">
             <i class="fa fa-usd" aria-hidden="true"/>

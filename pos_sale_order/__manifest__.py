@@ -15,10 +15,11 @@
     'assets': {
        'point_of_sale.assets': [
             'pos_sale_order/static/src/js/sale_order_button.js',
-           # 'pos_sale_order/static/src/js/sale_order_popup.js',
            'pos_sale_order/static/src/xml/sale_order_btn.xml',
-           # 'pos_sale_order/static/src/xml/sale_order_popup.xml'
        ],
+        'installable': True,
+        'application': True,
+        'license': 'LGPL-3',
     }
 }
 
