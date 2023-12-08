@@ -4,7 +4,7 @@ from odoo import fields, models
 
 
 class ComboProduct(models.Model):
-    """class to inherit the product_product"""
+    """class for inherit the product_product"""
     _inherit = 'product.template'
 
     is_combo = fields.Boolean(

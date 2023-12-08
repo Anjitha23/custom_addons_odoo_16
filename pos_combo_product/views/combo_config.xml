@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--created new page and tree in the product product model-->
+    <record id="combo_config" model="ir.ui.view">
+        <field name="name">combo.options.settings</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='inventory']" position="after">
+                <field name="combo_ok" invisible="1"/>
+                <page string="Combo settings" attrs="{'invisible': [('combo_ok', '=', False)]}">
+                    <field name="combo_options_ids">
+                        <tree editable="bottom">
+                            <field name="combo_pos_category_id"/>
+                            <field name="combo_product_ids" widget="many2many_tags"/>
+                            <field name="is_required_product"/>
+                            <field name="item_count"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

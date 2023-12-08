@@ -1,0 +1,15 @@
+<!--product items xml inherited and added combo product label if its a combo product-->
+<templates id="template" xml:space="preserve">
+    <t t-name="ProductItem" t-inherit="point_of_sale.ProductItem"  t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('product-img')]" position="inside">
+            <t t-if="props.product.combo_ok == true and props.product.combo_options_ids[0] != undefined ">
+                <div class="ribbon">combo product</div>
+            </t>
+        </xpath>
+    </t>
+</templates>
+
+
+
+
+

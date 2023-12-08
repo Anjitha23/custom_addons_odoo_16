@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Added is_combo field in the product product-->
+    <record id="is_combo_product" model="ir.ui.view">
+        <field name="name">product.combo.enabled</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <span class="d-inline-block">
+                        <field name="combo_ok"/>
+                        <label for="combo_ok"/>
+                </span>
+            </xpath>
+        </field>
+    </record>
+</odoo>
