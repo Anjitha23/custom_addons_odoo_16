@@ -12,6 +12,7 @@ class SaleOrder(models.Model):
                                               "Associated products"
                                               " of the customer will be"
                                               " added to the order line")
+    associated_products11 = fields.Char("teest")
 
     @api.onchange('associated_products')
     def onchange_associated_products(self):
